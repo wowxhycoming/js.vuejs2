@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>4.数据绑定一次</title>
+</head>
+<body>
+<div id="app">
+    <input v-model="msg">
+    <div v-once>{{msg}}</div>
+    绑定 html
+    <div>{{h1}}</div>
+    <div v-html="h1"></div>
+</div>
+</body>
+<script src="vue_v2.3.4.js"></script>
+<script>
+    var vm = new Vue({
+        el:"#app",
+        data:{
+            msg:'msg',
+            h1:'<h1>this is h1</h1>'
+
+        }
+    })
+</script>
+</html>

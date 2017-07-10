@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1.HelloWorld</title>
+</head>
+<body>
+
+<div id="app">
+    <!-- {{}} 中的内容将被 vue 看成是变量名， vue 会寻找对应的值进行渲染-->
+    被定义的变量 ： {{msg}}
+    <br/>
+    未被定义的变量：{{msg111}}
+</div>
+<script src="vue_v2.3.4.js"></script>
+<script>
+    // 初始化 Vue
+    var vm = new Vue({
+        el : "#app", // 将 vm 绑定到 #app 上
+        data : { // 数据区，data 中的数据都被 vue 直接挂载到 vue 实例上（可以通过 vm.key 直接访问）
+            msg:'welcome to vue'
+        }
+    });
+</script>
+
+</body>
+</html>

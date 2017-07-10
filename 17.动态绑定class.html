@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .back {
+            background:blue;
+        }
+        .color {
+            color : red;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <p class="back color">一段被样式摆布的文字</p>
+    <p :class="{back:flag,color:!flag}">一段用绑定维护的样式。绑定的是表达式，根据 boolean 类型控制样式。</p>
+    <button type="button" @click="change">切换 flag</button>
+
+    <div :class="[p1,p2]">123</div>
+</div>
+<script src="vue_v2.3.4.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            attr : 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png',
+            title: '这是百度的图片',
+            w:'200px',
+            flag:true,
+            p1:'back', // p1 变量的值为 back ，back是样式
+            p2:'color'
+        },
+        methods:{
+            change() {
+                this.flag = !this.flag;
+            }
+        }
+    })
+</script>
+</body>
+</html>

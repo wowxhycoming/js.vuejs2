@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    {{msg}}
+</div>
+<script src="vue_v2.3.4.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app', // 如果没有挂载点，vue 是不进行编译的
+        data:{
+            msg:'this is a msg'
+        },
+        beforeCreate() {
+            console.log("创建前");
+        },
+        created() {
+            console.log("创建后");
+        },
+        beforeMount() {
+            console.log("挂载钱");
+        },
+        mounted() {
+            console.log("挂载后")
+        },
+        beforeUpdate() {
+            console.log("修改前");
+        },
+        updated() {
+            console.log("修改后");
+        },
+        beforeDestroy() {
+            console.log("销毁前");
+        },
+        destroyed() {
+            console.log("销毁后");
+        }
+    });
+
+    vm.msg = 'hello';
+    setTimeout(function() {
+        vm.$destroy();
+        console.log(vm);
+    },1000);
+
+</script>
+</body>
+</html>

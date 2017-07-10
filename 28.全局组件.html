@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>全局组件，定义在实例外面，所有实例都可以使用</div>
+<div id="app1">
+    <hello></hello>
+</div>
+<div id="app2">
+    <hello></hello>
+</div>
+<script src="vue_v2.3.4.js"></script>
+<script>
+    /* 组件的使用方式
+    // 通过 Vue.extend 声明组件
+    var et = Vue.extend({
+        template:'<div>hello component</div>'
+    });
+
+    // 注册组件 , 组件名称 和 标签名称 相同
+    Vue.component('hello', et);
+    */
+
+    /*语法糖的形式,*/
+    Vue.component('hello', {
+        template:'<div>simple component . 组件内定义的数据 ->{{msg}}<-。 组件内部不能使用vue 实例定义的数据 ->{{app1_data}}<-  为空， 还会提示该数据没有声明。</div>',
+        // 在组件中，data 是一个函数， 函数的返回值是组件的数据
+        data() {
+            return {msg:'data in component'};
+        }
+    });
+
+    var vm1 = new Vue({
+        el:'#app1',
+        data:{
+            app1_data: 'app1_data'
+        }
+    });
+    var vm2 = new Vue({
+        el:'#app2',
+        data:{
+
+        }
+    });
+
+</script>
+</body>
+</html>

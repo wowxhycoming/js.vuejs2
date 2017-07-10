@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    {{amount}}
+    <br>
+    {{total}} = {{male}} + {{female}}
+    <button type="button" @click="change">total 变成 200</button>
+</div>
+
+<script src="vue_v2.3.4.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            count:10,
+            price:20,
+
+            male:11,
+            female:100
+        },
+        methods:{
+            change() {
+                this.total = 200;
+            }
+        },
+        computed:{
+            amount() {
+                return this.price * this.count;
+            },
+            total:{
+                get:function() {
+                    return this.male + this.female;
+                },
+                set:function(total) {
+                    this.female = total - this.male;
+                }
+            }
+
+        }
+    })
+</script>
+</body>
+</html>

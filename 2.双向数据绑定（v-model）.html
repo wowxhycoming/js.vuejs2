@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2.双向数据绑定</title>
+</head>
+<body>
+<div class="app">
+    <h1 style="color:red">所有的表单元素都应该增加 v-model 指令</h1>
+    <!--双向数据绑定，是 模型-视图模型-视图。要满足视图是可以更改的，一般使用表单元素 input 。-->
+    数据 ： {{msg}}
+    <!-- 双向数据绑定需要一个指令， v-model-->
+    <br/>
+    视图 ： <input type="text" v-model="msg">
+
+    <br/>
+    也可以通过浏览器调试查看和更改变量 msg。查看 msg : vm.msg ； 更改 msg : vm.msg = '1' 。
+
+
+</div>
+<script src="vue_v2.3.4.js"></script>
+<script>
+    var vm = new Vue({
+        el:".app", // CSS 选择器
+        data:{
+            msg:'this is a msg'
+        }
+    });
+</script>
+</body>
+</html>

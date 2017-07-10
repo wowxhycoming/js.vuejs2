@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>局部组件，定义在实例里面，只有该实例可以使用</div>
+<div id="app">
+    <hello></hello>
+</div>
+<script src="vue_v2.3.4.js"></script>
+<script>
+
+
+    var vm1 = new Vue({
+        el:'#app',
+        data:{
+            app1_data: 'app1_data'
+        },
+        components:{
+            hello:{
+                template:'<h1>hello local component, component data >{{msg}}<</h1>',
+                data() {
+                    return {
+                        msg : 'data in local component'
+                    }
+                }
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

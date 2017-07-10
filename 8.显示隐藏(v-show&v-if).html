@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <button @click="change">显示-隐藏：查看页面元素区别表单元素是否存在</button>
+    <div v-show="falg">v-show 是控制样式是否显示，元素还是实际存在的</div>
+    <div v-if="falg">v-if 是控制元素是否实际存在</div>
+    <hr/>
+    {{obj.name}}
+    如果obj 没有被声明，则会发生报错。现显示对象时，应该先加上 v-if
+    <div v-if="noOne">
+        {{noOne.name}}
+    </div>
+
+</div>
+<script src="vue_v2.3.4.js"></script>
+<script>
+    // 绑定方法的时候，是否加() , 决定事件源对象是否默认存在。 如果加() ，就要手动传入事件源 ($event)
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            falg:true,
+            obj:{name:'xxx'},
+            noOne:undefined
+        },
+        methods:{
+            change() {
+                vm.falg = !vm.falg;
+            }
+        }
+    })
+</script>
+</body>
+</html>

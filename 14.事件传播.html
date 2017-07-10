@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <div @click="fn">
+        给div绑定事件，发生了事件冒泡<br>
+        <a href="#" >父DIV中</a>
+        <div @click="fn">
+            <a href="#" >子DIV中</a>
+        </div>
+    </div>
+    <hr/>
+    <div @click="fn1">
+        用 @click.stop。 .stop 叫修饰符<br>
+        <a href="#" >父DIV中</a>
+        <div @click.stop="fn1">
+            <a href="#" >子DIV中</a>
+        </div>
+    </div>
+    <hr>
+    <a href="www.baidu.com" @click="jump">跳转</a>
+    <a href="www.baidu.com" @click.prevent="jump">使用 @click.prevent 阻止了默认事件，停止跳转</a>
+</div>
+
+<script src="vue_v2.3.4.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        methods:{
+            fn() {
+                alert("fn");
+            },
+            fn1() {
+                alert("fn");
+            },
+            jump() {
+                alert("jump");
+            }
+        }
+
+    });
+
+</script>
+</body>
+</html>

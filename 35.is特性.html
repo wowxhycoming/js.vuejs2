@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<template id="temp1">
+    <div>
+        temp1
+    </div>
+</template>
+
+<template id="temp2">
+    <div>
+        temp2
+    </div>
+</template>
+
+<div id="app">
+    <button @click="change_tmpl1" type="button">temp1</button>
+    <button @click="change_tmpl2" type="button">temp2</button>
+    <component :is="componentName"></component>
+</div>
+
+<script src="vue_v2.3.4.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            componentName: 't1'
+        },
+        methods: {
+            change_tmpl1() {
+                this.componentName = 't1';
+            },
+            change_tmpl2() {
+                this.componentName = 't2';
+            }
+        },
+        components: {
+            t1: {
+                template: '#temp1'
+            },
+            t2: {
+                template: '#temp2'
+            }
+        }
+    })
+
+</script>
+
+
+</body>
+</html>

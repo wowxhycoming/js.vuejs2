@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3.表达式</title>
+</head>
+<body>
+<div class="app">
+    <h5 style="color:red">表达式支持：赋值、运算、三元表达式。不支持逻辑、代码等</h5>
+    数据 ： {{msg == 'hello' ? 'hello msg' : msg}} {{age=100}} {{1+2*3}}
+    <br/>
+    视图 ： <input type="text" v-model="msg">
+    <br/>
+
+
+</div>
+<script src="vue_v2.3.4.js"></script>
+<script>
+    var vm = new Vue({
+        el:".app", // CSS 选择器
+        data:{
+            msg:'hello',
+            age:100
+        }
+    });
+</script>
+</body>
+</html>

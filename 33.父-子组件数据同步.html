@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <div>在父组件中，不直接放回数据，而是在外面再套一层对象，将真实要返回的数据包裹一层 parentObj:{parentMsg: '===父组件中定义的数据==='}</div>
+    <p>
+        父子组件同步数据：保持 父 - 子 组件有一个变量一直是等值；<br>
+        而 父 - 子 、 子 - 父 组件传递数据，只是将数据进行传递，后续数据变化，并不会同步。
+    </p>
+    <hr>
+    <parent></parent>
+</div>
+
+<template id="parent_tmpl">
+    <div>
+        <div>parent : {{parentObj.parentMsg}}</div>
+        <child :param="parentObj"></child>
+    </div>
+</template>
+<script src="vue_v2.3.4.js"></script>
+<script>
+
+
+    var vm1 = new Vue({
+        el: '#app',
+        data: {
+            app1_data: 'app1_data'
+        },
+        components: {
+            parent: {
+                template: '#parent_tmpl',
+                data() {
+                    return {
+                        parentObj:{parentMsg: '===父组件中定义的数据==='}
+                    }
+                },
+                components: {
+                    child: {
+                        template: '<div @click="syncData">child : {{param.parentMsg}}</div>',
+                        data() {
+                            return {
+                                childMsg: '===子组件中定义的数据==='
+                            }
+                        },
+                        props: {param:Object}, // 可以通过数组形式。
+                        methods:{
+                            syncData() {
+                                this.param.parentMsg = this.childMsg;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

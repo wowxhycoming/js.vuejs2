@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .back {
+            background:blue;
+        }
+        .color {
+            color : red;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div :style="{background:p4,color:p5}">对象形式，行内样式，"" 中放的都是json对象</div>
+    <div :style="{p3:p4,p6:p5}">只有 value 可以使用变量，key 不能使用变量。 {p3:p4,p6:p5} 失败</div>
+
+    <div :style="[p7,p8]">数组形式，数组中的变量必须是 json 格式</div>
+</div>
+<script src="vue_v2.3.4.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            attr : 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png',
+            title: '这是百度的图片',
+            w:'200px',
+            flag:true,
+            p1:'back', // p1 变量的值为 back ，back是样式
+            p2:'color',
+            p3:'background',
+            p4:'blue',
+            p5:'red',
+            p6:'color',
+            p7:{fontSize:'60px'},
+            p8:{background:'yellow'}
+
+        },
+        methods:{
+            change() {
+                this.flag = !this.flag;
+            }
+        }
+    })
+</script>
+</body>
+</html>

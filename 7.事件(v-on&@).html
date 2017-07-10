@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <button type="button" v-on:click="fn1">fn1</button>
+    <button type="button" v-on:click="fn2()">fn2</button>
+    <button type="button" v-on:click="fn3($event)">fn3</button>
+    <hr/>
+    <button type="reset" @click="addIphone('iphone8')">添加iphone8</button>
+    <ul>
+        <li v-for="(value,index) in iphoneArr">
+            {{index}} - {{value}}
+        </li>
+    </ul>
+</div>
+<script src="vue_v2.3.4.js"></script>
+<script>
+    // 绑定方法的时候，是否加() , 决定事件源对象是否默认存在。 如果加() ，就要手动传入事件源 ($event)
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            iphoneArr:['iphone5','iphone6','iphone7']
+        },
+        methods:{
+            fn1(e) {
+                console.log(e);
+                alert('a');
+            },
+            fn2(e) {
+                console.log(e);
+                alert('a');
+            },
+            fn3(e) {
+                console.log(e);
+                alert('a');
+            },
+            addIphone(item) {
+                this.iphoneArr.push(item);
+            }
+        }
+    })
+</script>
+</body>
+</html>

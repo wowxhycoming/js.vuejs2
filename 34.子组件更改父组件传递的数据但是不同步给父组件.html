@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+
+    <hr>
+    <parent></parent>
+</div>
+
+<template id="parent_tmpl">
+    <div>
+        <div>parent : {{parentMsg}}</div>
+        <child :param="parentMsg"></child>
+    </div>
+</template>
+
+<template id="child_tmpl">
+    <div>
+        <div @click="syncData">child : {{param}}</div>
+        <div @click="changeMid">child middle var : {{middleVar}}</div>
+    </div>
+</template>
+
+<script src="vue_v2.3.4.js"></script>
+<script>
+
+
+    var vm1 = new Vue({
+        el: '#app',
+        data: {
+            app1_data: 'app1_data'
+        },
+        components: {
+            parent: {
+                template: '#parent_tmpl',
+                data() {
+                    return {
+                        parentMsg: '===父组件中定义的数据==='
+                    }
+                },
+                components: {
+                    child: {
+                        template: '#child_tmpl',
+                        data() {
+                            return {
+                                childMsg: '直接对父组件传递过来的变量进行更改会引起警告，采用第三方变量来解决',
+                                middleVar : ''
+                            }
+                        },
+                        mounted: function() {
+                            this.middleVar = this.param;
+                        },
+                        props: {param:String}, // 可以通过数组形式。
+                        methods:{
+                            syncData() {
+                                this.param = this.childMsg;
+                            },
+                            changeMid() {
+                                this.middleVar = this.childMsg;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    {{msg}} {{arr}}
+    <hr/>
+    <ul>
+        <li v-for="i in arr">
+            {{i}}
+        </li>
+    </ul>
+    <hr/>
+    <ul>
+        <li v-for="(value,index) in arr">
+            {{index}} - {{value}}
+        </li>
+    </ul>
+</div>
+</body>
+<script src="vue_v2.3.4.js"></script>
+<script>
+    var vm = new Vue({
+        el:"#app",
+        data:{
+            msg:'message',
+            arr:['iphone5','iphone6','iphone7','iphone7']
+        }
+    });
+</script>
+</html>

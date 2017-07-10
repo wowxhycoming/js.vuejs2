@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <p>动态绑定数据，"" 中的字符串，都是 vue 中的变量名</p>
+    <img :src="attr" :title="title" :width="w">
+</div>
+<script src="vue_v2.3.4.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            attr : 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png',
+            title: '这是百度的图片',
+            w:'200px'
+        }
+    })
+</script>
+</body>
+</html>

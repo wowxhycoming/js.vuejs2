@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        [v-cloak] {
+            display : none;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div>
+        v-cloak ： 当数据加载完毕后，会将 v-cloak 移除掉。<br>
+        可以先用 css 属性选择器将 v-cloak 全部 display 掉，就是所有带有该元素的标签都不会显示。<br>
+        当数据加载完毕后，v-cloak 被移除后， 标签将会恢复显示。<br>
+        用此方法，解决 双花括号 的闪烁问题。<hr>
+    </div>
+    <div v-cloak>
+        {{msg}}
+    </div>
+</div>
+<script src="vue_v1.0.28.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app', // 如果没有挂载点，vue 是不进行编译的
+        data:{
+            msg:'this is a msg'
+        }
+    });
+</script>
+</body>
+</html>

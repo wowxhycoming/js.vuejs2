@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    {{total}}
+</div>
+
+<script src="vue_v2.3.4.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            count:10,
+            price:20
+        },
+        computed:{
+            total() {
+                return this.price * this.count;
+            }
+        },
+        a:10 // 实例上自定义的属性
+    });
+
+    // vm.$el 当前实例绑定的那个元素
+    vm.$el.style.background = 'red';
+
+    // vm.$data 当前实例上的数据
+    console.log('count=' + vm.$data.count);
+
+    // vm.$options 实例上自定义的属性
+    console.log('a=' + vm.$options.a);
+
+    vm.$watch('total',function(newVal,oldVal) {
+        console.log(newVal);
+        console.log(oldVal);
+    });
+
+    vm.$data.count = 100;
+</script>
+</body>
+</html>

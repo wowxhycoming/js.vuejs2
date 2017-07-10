@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    {{obj}}  {{obj | json}}
+    <hr/>
+    <span>v-for中的value 是 object 中每一项的 值</span>
+    <ul>
+        <li v-for="(key,value) in obj">
+            {{$index}} - {{$key}}|{{key}} - {{value}}
+        </li>
+    </ul>
+    <hr/>
+    <span>1.0 中的解构也不像2.0那样跟贴近原生 JS 。 2.0:(value,index) ; 1.0:(index,value)。</span>
+    <span>而在 2.0 中没有声明过的 $index 已经不能在使用了， track-by 也被废弃了</span>
+    <ul>
+        <li v-for="(index,value) in arr" track-by="$index">
+            {{index}} - {{value}}
+        </li>
+    </ul>
+</div>
+</body>
+<script src="vue_v1.0.28.js"></script>
+<script>
+    var vm = new Vue({
+        el:"#app",
+        data:{
+            msg:'message',
+            obj:{name:'xxx', age:30, gender:'male'}
+        }
+    });
+</script>
+</html>

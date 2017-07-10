@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    {{msg}} {{arr}}
+    <hr/>
+    <span>当arr中有重复元素，控制台会报错，建议加上 $track-by 强制索引</span>
+    <ul>
+        <li v-for="i in arr" track-by="$index">
+            {{$index}} - {{i}}
+        </li>
+    </ul>
+    <hr/>
+    <span>1.0 中的解构也不像2.0那样跟贴近原生 JS 。 2.0:(value,index) ; 1.0:(index,value)。</span>
+    <span>而在 2.0 中没有声明过的 $index 已经不能在使用了， track-by 也被废弃了</span>
+    <ul>
+        <li v-for="(index,value) in arr" track-by="$index">
+            {{index}} - {{value}}
+        </li>
+    </ul>
+</div>
+</body>
+<script src="vue_v1.0.28.js"></script>
+<script>
+    var vm = new Vue({
+        el:"#app",
+        data:{
+            msg:'message',
+            arr:['iphone5','iphone6','iphone7','iphone7']
+        }
+    });
+</script>
+</html>

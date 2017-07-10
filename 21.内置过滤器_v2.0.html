@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!--{{msg | capitalize}} <br>-->
+    <!--{{100 | currency}} <br>-->
+    <!--{{100 | currency '￥'}} 使用 空格 + '' 包裹传递参数 <br>-->
+    {{Date.now() | date('a','b')}} vue <br>
+    2.0 中传参方式类似于函数执行<br>
+</div>
+<script src="vue_v2.3.4.js"></script>
+<script>
+    // 这种例子程序中，要卸载new Vue之前，集成项目中还不知道如何。
+    Vue.filter('date', function(input, p1, p2) {
+        console.log('第一个参数为要过滤的元素， 以后的元素为传入的参数');
+        var d = new Date(input);
+        return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDay()}
+        ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}.${d.getMilliseconds()}
+        ${p1} ${p2}`
+    });
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'hello'
+        }
+    });
+
+
+</script>
+</body>
+</html>

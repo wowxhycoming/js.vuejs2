@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <div>
+        1. 结构：div中显示父附件；父组件中包含一个子组件。<br>
+        2. 目的：子组件中定义一个数据，要在父组件中显示（将数据传递给父组件）。<br>
+        3. 明确：直接在子组件中引用父组件的变量是不可行的。<br>
+        4. 实现：<br>
+        4.1. 在子组件中发生要传递的数据 : this.$emit('eventName', data)， 该数据会发送到子组件上。<br>
+        4.2. 在子组件上 声明 @eventName="function"。eventName 是子组件内发射的事件； function 这个方法应该在父组件中定义。 <br>
+        4.3. 在父组件中声明方法 function ， 通过function(data) 的参数 data 拿到子组件发生的数据。<br>
+
+    </div>
+    <hr>
+    <parent></parent>
+</div>
+
+<template id="parent_tmpl">
+    <div>
+        <div>parent : {{parentMsg}}</div>
+        <child @tell="changeParentDate"></child>
+    </div>
+</template>
+<script src="vue_v2.3.4.js"></script>
+<script>
+
+
+    var vm1 = new Vue({
+        el: '#app',
+        data: {
+            app1_data: 'app1_data'
+        },
+        components: {
+            parent: {
+                template: '#parent_tmpl',
+                data() {
+                    return {parentMsg:'初始数据'};
+                },
+                methods:{
+                    changeParentDate(data) {
+                        this.parentMsg = data;
+                    }
+                },
+                components: {
+                    child: {
+                        template: '<div @click="sendDataToChildTag">child : {{childMsg}} , 点击该区域改变父组件变量的值</div>',
+                        data() {
+                            return {
+                                childMsg: '===子组件中定义的数据==='
+                            }
+                        },
+                        methods:{
+                            sendDataToChildTag() {
+                                this.$emit('tell', this.childMsg);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

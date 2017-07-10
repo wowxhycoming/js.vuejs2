@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <input @keydown.13="keydownEnter">
+    <input @keydown.left="keydownLeft">
+</div>
+
+<script src="vue_v2.3.4.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        methods:{
+            keydownEnter() {
+                alert("按下了回车");
+            },
+            keydownLeft() {
+                alert("按下了→");
+            }
+        }
+
+    });
+
+</script>
+</body>
+</html>

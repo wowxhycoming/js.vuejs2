@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <parent></parent>
+
+    <div><h1>字符组件各自定义的数据是不共享的，不向上共享，也不向下共享。</h1></div>
+    <div><h1>在父组件中 使用子组件的时候， 需要使用一个元素包裹子组件</h1></div>
+</div>
+<template id="parent_tmpl">
+    <h1>parent component , 在父组件中引用子组件，而不要再html中应用，因为父组件会全完覆盖标签> <br>
+        父组件中获取子组件数据 >{{childMsg}}< <br>
+        <child></child>
+        <</h1>
+</template>
+<script src="vue_v2.3.4.js"></script>
+<script>
+
+
+    var vm1 = new Vue({
+        el:'#app',
+        data:{
+            app1_data: 'app1_data'
+        },
+        components:{
+            parent:{
+                template:'#parent_tmpl',
+                data() {
+                    return {
+                        parentMsg : '===父组件中定义的数据==='
+                    }
+                },
+                components:{
+                    child:{
+                        template:'<h3>child component, 子组件中获取父组件数据 >{{parentMsg}}< </h3>',
+                        data() {
+                            return {
+                                childMsg : '===子组件中定义的数据==='
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+</script>
+</body>
+</html>
