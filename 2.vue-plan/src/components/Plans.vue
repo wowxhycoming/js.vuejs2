@@ -4,11 +4,12 @@
         <router-link to="/plans/addPlan" class="btn btn-primary">创建</router-link>
         <hr>
         <router-view></router-view>
-        <ul class="list-group" v-for="item in list">
+        <ul class="list-group" v-for="item in planList">
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-md-2 text-center">
                         <img :src="item.avatar" class="img-circle img-responsive">
+                        {{item.name}}
                     </div>
                     <div class="col-md-2">
                         <div>
@@ -24,31 +25,38 @@
                         {{item.comment}}
                     </div>
                     <div class="col-md-2 text-center">
-                        <button class="btn btn-danger">&times;</button>
+                        <button class="btn btn-danger" @click="removePlan(item)">&times;</button>
                     </div>
                 </div>
             </li>
         </ul>
+        <div class="text-danger h3" v-show="!isShowAddPlanHint">
+            目前没有任务，请添加。
+        </div>
     </div>
 </template>
 
 <script>
+    import * as types from '@/store/types';
+    import {mapState,mapActions,mapGetters} from 'vuex';
+
     export default {
         data() {
-            return {
-                list: [
-                    {
-                        avatar: 'http://tupian.enterdesk.com/2014/lxy/2014/12/03/38/3.png',
-                        name: 'xhy',
-                        date: '2017-07-30', // 触发时间
-                        timer: 2, // 耗时
-                        comment: '做些事儿'
-                    }
-                ]
+            return { // 删除了假数据
             }
         },
+        computed: { // 增加
+            ...mapState(['planList']), // 解构；取 store/index.js state 里的名字
+            ...mapGetters(['isShowAddPlanHint']) // 名字相同，使用数组，把名字直接拿过来
+        },
         components: {},
-        methods: {}
+        methods: {
+            ...mapActions([types.ST_PLAN_LIST_DELETE, types.ST_PLAN_TOTAL_TIME_DECREMENT]),
+            removePlan(item) {
+                this[types.ST_PLAN_LIST_DELETE](item);
+                this[types.ST_PLAN_TOTAL_TIME_DECREMENT](item.timer);
+            }
+        },
     }
 </script>
 
