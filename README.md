@@ -436,7 +436,28 @@ npm i vuex -S
     </div>
     ```
 
-## 
+## 解决带小数的计算bug
+
+使用 filter 解决。
+
+1. 在 `SlideBar.vue` 模板中定义 filter
+
+    ```
+    export default {
+        ... ...
+        filters: {
+            numberFix(t) { // t 为要过滤的值
+                return t.toFixed(2); // 保留两位小数
+            }
+        }
+    ```
+
+2. 对页面元素使用 filter
+
+    ```
+    {{totalTime | numberFix}} 时间
+    ```
+
 
 
 ## 使用 vuex 在多个组件之间共享数据

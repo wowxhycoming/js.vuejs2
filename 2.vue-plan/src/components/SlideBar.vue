@@ -4,7 +4,7 @@
             <h2>计划的总时间</h2>
         </div>
         <div class="panel-body">
-            {{totalTime}} 时间
+            {{totalTime | numberFix}} 时间
         </div>
     </div>
 </template>
@@ -21,7 +21,12 @@
             })
         },
         components: {},
-        methods: {}
+        methods: {},
+        filters: {
+            numberFix(t) { // t 为要过滤的值
+                return t.toFixed(2); // 保留两位小数
+            }
+        }
     }
 </script>
 
