@@ -5,6 +5,7 @@ import App from './App';
 import router from './router';
 // 引入 bootstrap 到全局下
 import 'bootstrap/dist/css/bootstrap.css';
+import 'animate.css';
 import {store} from './store';
 
 // Vue.config.productionTip = false;

@@ -522,3 +522,39 @@ npm i vuex -S
     ```
     
     > 这时在刷新页面，数据不会再丢失了。
+    
+## 动画
+
+1. 安装动画库
+
+    ```
+    npm i animate.css -S
+    ```
+    
+2. 引入动画库
+
+    在 `src/main.js` 中引入 `animate.css` 。类似于 `bootstrap` 。
+    
+    ```
+    import 'animate.css';
+    ```
+    
+3. 给会发生变化的点添加动画
+
+    会变化的地方主要集中在 \<router-view\>\<\/router-view\>
+    
+    * `src/App.vue`
+    ```
+    <div class="col-md-9">
+        <transition enter-active-class="animated bounceIn"
+                    leave-active-class="animated bounceOut"
+                    mode="out-in"
+                    >
+            <router-view class="position"></router-view>
+        </transition>
+    </div>
+    ```
+    
+    > enter-active-class="animated bounceIn" 进入动画  
+    leave-active-class="animated bounceOut" 离开动画  
+    mode="out-in" 动画先出后进
