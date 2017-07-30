@@ -458,13 +458,67 @@ npm i vuex -S
     {{totalTime | numberFix}} 时间
     ```
 
+## 使用 local 保存数据
 
+`src/store/local.js` 就是为了存储数据到本地的
 
-## 使用 vuex 在多个组件之间共享数据
-1. 添加计划
-2. 计算计划总时间
-3. 移除计划 和 减少计划总时间
-4. 取消 功能
-5. 使用 getters 计算属性
+1. 创建 `src/store/local.js`
 
-6. 时间带小数计算 bug
+    ```
+    // 存储本地数据
+    export const setStorage = function(data) { // data 为要存储的数据
+        localStorage.setItem('data', data);
+    }
+    
+    // 获取数据
+    export const getStorage = function() {
+        return localStorage.getItem('data');
+    }
+    ```
+    
+2. 在 `mutation` 中`存储`数据
+
+    数据每次发生改变都需要进行存储，`mutation` 是负责更改状态的，所以在 `mutation` 每次更改状态的同时，都需要存储数据。
+    
+    ```
+    import * as types from './types';
+    import {setStorage} from './local'
+    
+    export const mutations = {
+        // 提交到mutation后，该改状态了
+        // state 代表当前容器中的状态
+        [types.ADD_PLAN](state,plan){
+            state.planList.push(plan);
+            setStorage(state);
+        },
+        [types.ST_PLAN_TOTAL_TIME_INCREMENT](state,timeSpand) {
+            state.totalTime += timeSpand;
+            setStorage(state);
+        },
+        [types.ST_PLAN_LIST_DELETE](state, plan) {
+            // 返回 false 丢弃，返回 true 保留。
+            state.planList = state.planList.filter(item => item != plan);
+            setStorage(state);
+        },
+        [types.ST_PLAN_TOTAL_TIME_DECREMENT](state, timeSpend) {
+            state.totalTime -= timeSpend;
+            setStorage(state);
+        }
+    };
+    ```
+    
+3. 在初始化 `state` 的时候需要`获取`local数据
+
+    在 `src/store/index.js` 中初始化 state 时，先检查 local 数据，如果有数据，则使用local中的。
+    
+    ```
+    // 使用 storage 的值初始化 state
+    import {getStorage} from './local';
+    
+    const state = getStorage() || {
+        totalTime: 0, // 总时间
+        planList: [] // 每个计划数据
+    }
+    ```
+    
+    > 这时在刷新页面，数据不会再丢失了。
