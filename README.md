@@ -558,3 +558,51 @@ npm i vuex -S
     > enter-active-class="animated bounceIn" 进入动画  
     leave-active-class="animated bounceOut" 离开动画  
     mode="out-in" 动画先出后进
+    
+# 3. bookstore
+
+## 初始化项目
+
+1. 创建项目
+
+    ```
+    vue init webpack 3.bookstore
+    ```
+    
+2. 清理项目文件
+
+    * src/App.vue 只留 template script style，在 template 中写个字符串 “BookStore”
+    * src/components/Hello.vue 删除
+    * src/router/index.js 删掉 Hello 相关的内容
+    
+3. 安装包
+
+    ```
+    npm i bootstrap vue-resource axios -S
+    ```
+    
+## 配置代理表
+
+1. 修改 `/config/index.js`
+
+    ```
+    proxyTable: {
+        '/book': 'http://localhost:4000',// 访问 /book 把请求代理到 http://localhost:4000 并把 /book 接到后面
+    },
+    ```
+    
+## 动态路由
+
+```
+<router-link :to="{ name:'detail', params: {id: book.bookId} }">进入详情</router-link>
+```
+
+`name:'detail'` 中的 'detail' 要在 router 中
+
+```
+{
+    path: '/detail/:id', // this.$route.params.id
+    component: Detail,
+    name:'detail'
+},
+```
